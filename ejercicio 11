@@ -1,0 +1,59 @@
+// ============================================================
+// EJERCICIO 11
+// Ingresar números hasta que se ingrese 0
+// y contar cuántos de ellos son positivos
+// ============================================================
+// Conceptos: ciclo while, break, contador (++)
+// ============================================================
+
+using System;
+
+namespace Ejercicio11
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 11: Contar positivos ===");
+            Console.WriteLine("Ingresa números. Escribe 0 para terminar.");
+            Console.WriteLine();
+
+            int contador = 0;  // aquí contamos cuántos positivos hay
+            double numero;     // aquí guardamos cada número que el usuario escribe
+
+            // while(true) = repite para siempre hasta que usemos "break"
+            while (true)
+            {
+                Console.Write("Número (0 para terminar): ");
+                numero = double.Parse(Console.ReadLine());
+
+                // Si el usuario escribió 0, salimos del bucle
+                if (numero == 0)
+                {
+                    break; // "break" rompe el ciclo y salta al código de abajo
+                }
+
+                // Si el número es mayor que cero, es positivo → contamos uno más
+                if (numero > 0)
+                {
+                    contador++; // contador++ es igual a: contador = contador + 1
+                    Console.WriteLine($"  ✓ Positivo registrado. Total hasta ahora: {contador}");
+                }
+                else
+                {
+                    Console.WriteLine("  (número negativo, no se cuenta)");
+                }
+            }
+
+            // Cuando salimos del bucle, mostramos el resultado final
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine($"Total de números positivos: {contador}");
+            Console.WriteLine("--------------------------------------");
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
