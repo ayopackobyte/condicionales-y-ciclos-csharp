@@ -1,0 +1,81 @@
+// ============================================================
+// EJERCICIO 19
+// Solicitar una edad y repetir hasta que el valor sea válido
+// (la edad no puede ser negativa, debe ser >= 0)
+// ============================================================
+// Conceptos: do-while con validación, clasificación por rangos
+// ============================================================
+
+using System;
+
+namespace Ejercicio19
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 19: Validación de Edad ===");
+            Console.WriteLine();
+
+            int edad; // aquí guardamos la edad ingresada
+
+            // do-while garantiza que el bloque se ejecute AL MENOS UNA VEZ.
+            // Luego revisa la condición: si edad sigue siendo negativa, repite.
+            //
+            // Esto es ideal para validar datos: pedimos, revisamos,
+            // y si el dato es malo, volvemos a pedir.
+
+            do
+            {
+                Console.Write("Ingresa tu edad: ");
+                edad = int.Parse(Console.ReadLine());
+
+                // Si el usuario ingresó un número negativo, avisamos
+                if (edad < 0)
+                {
+                    Console.WriteLine("  Edad invalida. La edad no puede ser negativa.");
+                    Console.WriteLine("  Por favor intenta de nuevo.");
+                    Console.WriteLine();
+                }
+
+            } while (edad < 0); // repetimos MIENTRAS la edad sea negativa
+
+            // Cuando llegamos aquí, la edad ya es válida (>= 0)
+
+            // Clasificamos al usuario según su edad
+            string grupo;
+
+            if (edad < 3)
+            {
+                grupo = "Bebe (0-2 anos)";
+            }
+            else if (edad < 12)
+            {
+                grupo = "Nino/a (3-11 anos)";
+            }
+            else if (edad < 18)
+            {
+                grupo = "Adolescente (12-17 anos)";
+            }
+            else if (edad < 65)
+            {
+                grupo = "Adulto/a (18-64 anos)";
+            }
+            else
+            {
+                grupo = "Adulto/a mayor (65+ anos)";
+            }
+
+            // Mostramos el resultado
+            Console.WriteLine();
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine($"Edad registrada: {edad} anos");
+            Console.WriteLine($"Grupo de edad:   {grupo}");
+            Console.WriteLine("------------------------------------");
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
