@@ -1,0 +1,64 @@
+// ============================================================
+// EJERCICIO 14
+// Solicitar un número N y mostrar todos los números
+// pares desde 1 hasta N
+// ============================================================
+// Conceptos: ciclo for, operador módulo (%), números pares
+// ============================================================
+
+using System;
+
+namespace Ejercicio14
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 14: Números pares hasta N ===");
+            Console.WriteLine();
+
+            // Pedimos el número límite
+            Console.Write("Ingresa el número N: ");
+            int n = int.Parse(Console.ReadLine());
+
+            Console.WriteLine();
+            Console.WriteLine($"Números pares del 1 al {n}:");
+            Console.WriteLine("----------------------------");
+
+            // ----------------------------------------------
+            // El ciclo for tiene 3 partes separadas por ";"
+            //
+            //   for ( inicio ; condición ; incremento )
+            //
+            //   int i = 1  →  empezamos en 1
+            //   i <= n     →  seguimos mientras i no supere N
+            //   i++        →  al final de cada vuelta, sumamos 1 a i
+            // ----------------------------------------------
+
+            int cantidadPares = 0; // para contar cuántos pares encontramos
+
+            for (int i = 1; i <= n; i++)
+            {
+                // El operador % (módulo) da el RESIDUO de una división.
+                // Ejemplo: 8 % 2 = 0  (8 entre 2 es exacto, no sobra nada)
+                //          7 % 2 = 1  (7 entre 2 da 3 con residuo 1)
+                //
+                // Si el residuo de dividir entre 2 es 0 → el número es PAR
+
+                if (i % 2 == 0)
+                {
+                    Console.Write($"{i}  "); // mostramos el par en la misma línea
+                    cantidadPares++;
+                }
+            }
+
+            Console.WriteLine(); // salto de línea al terminar la fila de números
+            Console.WriteLine("----------------------------");
+            Console.WriteLine($"Total de números pares encontrados: {cantidadPares}");
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
