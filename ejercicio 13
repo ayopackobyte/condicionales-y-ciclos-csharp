@@ -1,0 +1,78 @@
+// ============================================================
+// EJERCICIO 13
+// Solicitar una nota y clasificar al estudiante
+// según su rendimiento
+// ============================================================
+// Conceptos: if / else if / else encadenados, validación
+// ============================================================
+
+using System;
+
+namespace Ejercicio13
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 13: Clasificar estudiante ===");
+            Console.WriteLine();
+
+            // Pedimos la nota
+            Console.Write("Ingresa la nota del estudiante (0 - 100): ");
+            double nota = double.Parse(Console.ReadLine());
+
+            // Primero validamos que la nota sea un número válido
+            if (nota < 0 || nota > 100)
+            {
+                // El operador || significa "o" → si nota < 0 O nota > 100
+                Console.WriteLine();
+                Console.WriteLine("Nota inválida. Debe estar entre 0 y 100.");
+            }
+            else
+            {
+                // La nota es válida → clasificamos con else if encadenados
+                // C# revisa cada condición en orden, de arriba hacia abajo.
+                // Cuando encuentra una que sea verdadera, ejecuta ese bloque
+                // y SALTA todos los demás.
+
+                string clasificacion;
+                string mensaje;
+
+                if (nota >= 90)
+                {
+                    clasificacion = "EXCELENTE";
+                    mensaje = "Rendimiento sobresaliente. ¡Felicidades!";
+                }
+                else if (nota >= 80)
+                {
+                    clasificacion = "MUY BUENO";
+                    mensaje = "Buen rendimiento. ¡Sigue así!";
+                }
+                else if (nota >= 70)
+                {
+                    clasificacion = "REGULAR / SATISFACTORIO";
+                    mensaje = "Has aprobado, pero puedes mejorar tu promedio.";
+                }
+                else
+                {
+                    // Si ninguna condición anterior fue verdadera, la nota es < 50
+                    clasificacion = "REPROBADO";
+                    mensaje = "No alcanzó la nota mínima.";
+                }
+
+                // Mostramos el resultado
+                Console.WriteLine();
+                Console.WriteLine("------------------------------------");
+                Console.WriteLine($"Nota ingresada:  {nota}");
+                Console.WriteLine($"Clasificación:   {clasificacion}");
+                Console.WriteLine($"Observación:     {mensaje}");
+                Console.WriteLine("------------------------------------");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
+
