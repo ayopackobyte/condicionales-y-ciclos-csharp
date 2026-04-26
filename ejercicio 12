@@ -1,0 +1,111 @@
+// ============================================================
+// EJERCICIO 12
+// Simular un cajero automático con:
+//   1. Consulta de saldo
+//   2. Depósito
+//   3. Retiro
+//   4. Salir
+// ============================================================
+// Conceptos: do-while, switch, saldo acumulado
+// ============================================================
+
+using System;
+
+namespace Ejercicio12
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 12: Cajero Automático ===");
+            Console.WriteLine();
+
+            double saldo = 1000.00; // saldo inicial del cliente
+            int opcion;             // guarda la opción del menú que elige el usuario
+
+            // do-while: ejecuta el bloque primero y luego revisa si debe repetirse.
+            // Se repite MIENTRAS la opción NO sea 4 (salir).
+            do
+            {
+                // Mostramos el menú cada vez que el bucle da una vuelta
+                Console.WriteLine();
+                Console.WriteLine("╔════════════════════════╗");
+                Console.WriteLine("║   CAJERO AUTOMÁTICO    ║");
+                Console.WriteLine("╠════════════════════════╣");
+                Console.WriteLine("║  1. Consultar saldo    ║");
+                Console.WriteLine("║  2. Depositar          ║");
+                Console.WriteLine("║  3. Retirar            ║");
+                Console.WriteLine("║  4. Salir              ║");
+                Console.WriteLine("╚════════════════════════╝");
+                Console.Write("Elige una opción: ");
+                opcion = int.Parse(Console.ReadLine());
+
+                // switch ejecuta un bloque diferente según el valor de "opcion"
+                switch (opcion)
+                {
+                    case 1:
+                        // CONSULTAR: solo mostramos el saldo actual
+                        Console.WriteLine();
+                        Console.WriteLine($"  Tu saldo actual es: ${saldo:F2}");
+                        // :F2 = formato con exactamente 2 decimales
+                        break;
+
+                    case 2:
+                        // DEPOSITAR: pedimos cuánto y lo sumamos al saldo
+                        Console.Write("  ¿Cuánto deseas depositar? $");
+                        double deposito = double.Parse(Console.ReadLine());
+
+                        if (deposito <= 0)
+                        {
+                            Console.WriteLine("  El monto debe ser mayor que cero.");
+                        }
+                        else
+                        {
+                            saldo = saldo + deposito;
+                            Console.WriteLine($"  Depósito exitoso.");
+                            Console.WriteLine($"  Nuevo saldo: ${saldo:F2}");
+                        }
+                        break;
+
+                    case 3:
+                        // RETIRAR: pedimos cuánto y lo restamos (si hay saldo suficiente)
+                        Console.Write("  ¿Cuánto deseas retirar? $");
+                        double retiro = double.Parse(Console.ReadLine());
+
+                        if (retiro <= 0)
+                        {
+                            Console.WriteLine("  El monto debe ser mayor que cero.");
+                        }
+                        else if (retiro > saldo)
+                        {
+                            // No puede retirar más de lo que tiene
+                            Console.WriteLine("  Saldo insuficiente para este retiro.");
+                        }
+                        else
+                        {
+                            saldo = saldo - retiro;
+                            Console.WriteLine($"  Retiro exitoso.");
+                            Console.WriteLine($"  Nuevo saldo: ${saldo:F2}");
+                        }
+                        break;
+
+                    case 4:
+                        // SALIR: solo un mensaje de despedida
+                        Console.WriteLine();
+                        Console.WriteLine("  Gracias por usar el cajero. ¡Hasta luego!");
+                        break;
+
+                    default:
+                        // Si escribió algo que no es 1, 2, 3 o 4
+                        Console.WriteLine("  Opción no válida. Intenta de nuevo.");
+                        break;
+                }
+
+            } while (opcion != 4); // repetimos el menú hasta que elija salir
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
