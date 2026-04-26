@@ -1,0 +1,60 @@
+// ============================================================
+// EJERCICIO 10
+// Solicitar tres números y determinar cuál es el mayor
+// ============================================================
+// Conceptos: variables, Console.ReadLine(), if / else if
+// ============================================================
+
+using System;
+
+namespace Ejercicio10
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 10: El número mayor ===");
+            Console.WriteLine();
+
+            // Pedimos el primer número
+            Console.Write("Ingresa el primer número:  ");
+            double num1 = double.Parse(Console.ReadLine());
+
+            // Pedimos el segundo número
+            Console.Write("Ingresa el segundo número: ");
+            double num2 = double.Parse(Console.ReadLine());
+
+            // Pedimos el tercer número
+            Console.Write("Ingresa el tercer número:  ");
+            double num3 = double.Parse(Console.ReadLine());
+
+            // ----------------------------------------------
+            // Lógica: asumimos que num1 es el mayor.
+            // Luego comparamos con los otros dos.
+            // Si alguno es más grande, actualizamos "mayor".
+            // ----------------------------------------------
+            double mayor = num1; // empezamos asumiendo que num1 gana
+
+            if (num2 > mayor)
+            {
+                mayor = num2; // num2 es más grande, ahora él es el mayor
+            }
+
+            if (num3 > mayor)
+            {
+                mayor = num3; // num3 es más grande, ahora él es el mayor
+            }
+
+            // Mostramos el resultado
+            Console.WriteLine();
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine($"El número mayor es: {mayor}");
+            Console.WriteLine("-----------------------------");
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
+
