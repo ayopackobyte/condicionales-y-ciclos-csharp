@@ -1,0 +1,93 @@
+// ============================================================
+// EJERCICIO 17
+// Sistema que asigna becas según el promedio del estudiante
+// ============================================================
+// Conceptos: if / else if, cálculo de porcentaje, variables string
+// ============================================================
+
+using System;
+
+namespace Ejercicio17
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 17: Sistema de Becas ===");
+            Console.WriteLine();
+
+            // Pedimos los datos del estudiante
+            Console.Write("Nombre del estudiante:       ");
+            string nombre = Console.ReadLine();
+
+            Console.Write("Promedio del estudiante (0-100): ");
+            double promedio = double.Parse(Console.ReadLine());
+
+            Console.Write("Costo total de la carrera:      $");
+            double costoTotal = double.Parse(Console.ReadLine());
+
+            // Validamos que el promedio sea válido
+            if (promedio < 0 || promedio > 100)
+            {
+                Console.WriteLine("\nPromedio inválido. Debe estar entre 0 y 100.");
+            }
+            else
+            {
+                // Determinamos el porcentaje de beca según el promedio
+                // Las condiciones van de mayor a menor (de más exigente a menos)
+
+                double porcentajeBeca;
+                string tipoBeca;
+
+                if (promedio >= 95)
+                {
+                    porcentajeBeca = 100;
+                    tipoBeca = "Beca Completa";
+                }
+                else if (promedio >= 85)
+                {
+                    porcentajeBeca = 75;
+                    tipoBeca = "Beca de Excelencia";
+                }
+                else if (promedio >= 75)
+                {
+                    porcentajeBeca = 50;
+                    tipoBeca = "Beca Parcial";
+                }
+                else if (promedio >= 65)
+                {
+                    porcentajeBeca = 25;
+                    tipoBeca = "Beca Minima";
+                }
+                else
+                {
+                    porcentajeBeca = 0;
+                    tipoBeca = "Sin beca (promedio insuficiente)";
+                }
+
+                // Calculamos el descuento y lo que realmente paga el estudiante
+                // Fórmula: descuento = precio total × (porcentaje / 100)
+                double descuento = costoTotal * (porcentajeBeca / 100);
+                double montoPagar = costoTotal - descuento;
+
+                // Mostramos el resultado
+                Console.WriteLine();
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine("║         RESULTADO DE BECA            ║");
+                Console.WriteLine("╠══════════════════════════════════════╣");
+                Console.WriteLine($"  Estudiante  : {nombre}");
+                Console.WriteLine($"  Promedio    : {promedio}");
+                Console.WriteLine($"  Tipo de beca: {tipoBeca} ({porcentajeBeca}%)");
+                Console.WriteLine("  ------------------------------------");
+                Console.WriteLine($"  Costo total : ${costoTotal:F2}");
+                Console.WriteLine($"  Descuento   : ${descuento:F2}");
+                Console.WriteLine($"  A pagar     : ${montoPagar:F2}");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
