@@ -1,0 +1,105 @@
+// ============================================================
+// EJERCICIO 18
+// Ingresar votos para candidatos y determinar el ganador
+// ============================================================
+// Conceptos: arreglos, do-while, búsqueda del máximo
+// ============================================================
+
+using System;
+
+namespace Ejercicio18
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 18: Sistema de Votación ===");
+            Console.WriteLine();
+
+            // Definimos los candidatos en un arreglo de strings
+            string[] candidatos = { "Yasser Hernandez", "Carlos Alberto", "Marcelo Jose" };
+
+            // Arreglo paralelo para contar los votos de cada candidato
+            // int[3] crea un arreglo de 3 enteros, todos inician en 0
+            int[] votos = new int[3];
+
+            int totalVotos = 0;
+            string respuesta;
+
+            // Bucle para ir recibiendo votos uno a uno
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("--- Candidatos ---");
+
+                // Mostramos la lista de candidatos numerada
+                for (int i = 0; i < candidatos.Length; i++)
+                {
+                    // candidatos.Length = cantidad de elementos en el arreglo = 3
+                    Console.WriteLine($"  {i + 1}. {candidatos[i]}");
+                }
+
+                Console.Write($"\nVota por el número del candidato (1-{candidatos.Length}): ");
+                int voto = int.Parse(Console.ReadLine());
+
+                // Validamos que el número esté en el rango correcto
+                if (voto >= 1 && voto <= candidatos.Length)
+                {
+                    // voto - 1 porque los arreglos empiezan en el índice 0
+                    // Si el usuario votó por la opción 1 → guardamos en votos[0]
+                    // Si votó por la 2 → votos[1], etc.
+                    votos[voto - 1]++;
+                    totalVotos++;
+                    Console.WriteLine($"  Voto registrado para: {candidatos[voto - 1]}");
+                }
+                else
+                {
+                    Console.WriteLine("  Numero invalido. Ese voto no se registró.");
+                }
+
+                Console.Write("\n¿Desea registrar otro voto? (s/n): ");
+                respuesta = Console.ReadLine();
+
+            } while (respuesta.ToLower() == "s");
+            // .ToLower() convierte a minúsculas, así funciona tanto "S" como "s"
+
+            // ---- CALCULAR Y MOSTRAR RESULTADOS ----
+
+            // Buscamos quién tiene más votos
+            // Empezamos asumiendo que el índice 0 (primer candidato) ganó
+            int indiceGanador = 0;
+
+            for (int i = 1; i < votos.Length; i++)
+            {
+                if (votos[i] > votos[indiceGanador])
+                {
+                    indiceGanador = i; // actualizamos si encontramos uno con más votos
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("╔═══════════════════════════════════╗");
+            Console.WriteLine("║        RESULTADOS FINALES         ║");
+            Console.WriteLine("╠═══════════════════════════════════╣");
+            Console.WriteLine($"  Total de votos emitidos: {totalVotos}");
+            Console.WriteLine();
+
+            for (int i = 0; i < candidatos.Length; i++)
+            {
+                // Calculamos el porcentaje de votos de cada candidato
+                // Si no hubo votos, evitamos dividir entre 0
+                double porcentaje = totalVotos > 0 ? (votos[i] * 100.0 / totalVotos) : 0;
+                Console.WriteLine($"  {candidatos[i]}: {votos[i]} votos ({porcentaje:F1}%)");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"  GANADOR: {candidatos[indiceGanador]}");
+            Console.WriteLine($"  con {votos[indiceGanador]} votos");
+            Console.WriteLine("╚═══════════════════════════════════╝");
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
