@@ -1,0 +1,60 @@
+// ============================================================
+// EJERCICIO 15
+// Solicitar las ventas de cada día de la semana
+// y calcular el promedio de ventas
+// ============================================================
+// Conceptos: ciclo for, arreglo de strings, acumulador, promedio
+// ============================================================
+
+using System;
+
+namespace Ejercicio15
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 15: Ventas de la semana ===");
+            Console.WriteLine();
+
+            // Arreglo con los nombres de los 7 días
+            // Un arreglo es una lista de elementos del mismo tipo
+            string[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
+
+            double totalVentas = 0; // aquí vamos acumulando la suma de todas las ventas
+
+            // Pedimos las ventas de cada día
+            // dias.Length nos dice cuántos elementos tiene el arreglo (en este caso, 7)
+            for (int i = 0; i < dias.Length; i++)
+            {
+                // dias[i] accede al elemento número i del arreglo
+                // cuando i = 0 → dias[0] = "Lunes"
+                // cuando i = 1 → dias[1] = "Martes"  etc.
+                Console.Write($"Ventas del {dias[i]}: $");
+                double venta = double.Parse(Console.ReadLine());
+
+                // Acumulamos: sumamos esta venta al total
+                // totalVentas += venta  es lo mismo que:
+                // totalVentas = totalVentas + venta
+                totalVentas += venta;
+            }
+
+            // Calculamos el promedio: total dividido entre 7 días
+            double promedio = totalVentas / 7;
+
+            // Mostramos el resumen
+            Console.WriteLine();
+            Console.WriteLine("==============================");
+            Console.WriteLine("    RESUMEN DE LA SEMANA");
+            Console.WriteLine("==============================");
+            Console.WriteLine($"Total de ventas:   ${totalVentas:F2}");
+            Console.WriteLine($"Promedio diario:   ${promedio:F2}");
+            // :F2 = muestra el número con exactamente 2 decimales
+            Console.WriteLine("==============================");
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
