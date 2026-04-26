@@ -1,0 +1,120 @@
+// ============================================================
+// EJERCICIO 16
+// Registrar y actualizar productos en un inventario
+// y mostrar el total de productos registrados
+// ============================================================
+// Conceptos: arreglos paralelos, búsqueda con for, do-while
+// ============================================================
+
+using System;
+
+namespace Ejercicio16
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== EJERCICIO 16: Inventario de Productos ===");
+            Console.WriteLine();
+
+            // Arreglos paralelos: nombres[0] y cantidades[0] son del mismo producto
+            // Capacidad máxima de 50 productos
+            string[] nombres    = new string[50];
+            int[]    cantidades = new int[50];
+
+            // Esta variable nos dice cuántos productos hemos registrado
+            int totalProductos = 0;
+
+            int opcion;
+
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("╔═══════════════════════════════╗");
+                Console.WriteLine("║       MENÚ DE INVENTARIO      ║");
+                Console.WriteLine("╠═══════════════════════════════╣");
+                Console.WriteLine("║  1. Registrar/Actualizar      ║");
+                Console.WriteLine("║  2. Ver inventario            ║");
+                Console.WriteLine("║  3. Salir                     ║");
+                Console.WriteLine("╚═══════════════════════════════╝");
+                Console.Write("Opción: ");
+                opcion = int.Parse(Console.ReadLine());
+
+                if (opcion == 1)
+                {
+                    // ---- REGISTRAR O ACTUALIZAR UN PRODUCTO ----
+
+                    Console.Write("Nombre del producto: ");
+                    string nombre = Console.ReadLine();
+
+                    Console.Write("Cantidad a agregar:  ");
+                    int cantidad = int.Parse(Console.ReadLine());
+
+                    // Buscamos si el producto ya existe en el inventario
+                    bool encontrado = false;
+
+                    for (int i = 0; i < totalProductos; i++)
+                    {
+                        // ToLower() convierte a minúsculas para comparar sin importar
+                        // si el usuario escribe "Leche", "leche" o "LECHE"
+                        if (nombres[i].ToLower() == nombre.ToLower())
+                        {
+                            // El producto YA existe → solo actualizamos la cantidad
+                            cantidades[i] += cantidad;
+                            Console.WriteLine($"\nProducto '{nombre}' actualizado.");
+                            Console.WriteLine($"Nueva cantidad: {cantidades[i]}");
+                            encontrado = true;
+                            break; // ya lo encontramos, no seguimos buscando
+                        }
+                    }
+
+                    // Si no lo encontramos, lo agregamos como producto nuevo
+                    if (!encontrado) // !encontrado = "si NO fue encontrado"
+                    {
+                        nombres[totalProductos]    = nombre;
+                        cantidades[totalProductos] = cantidad;
+                        totalProductos++;  // registramos uno más
+                        Console.WriteLine($"\nProducto '{nombre}' registrado correctamente.");
+                    }
+                }
+                else if (opcion == 2)
+                {
+                    // ---- VER TODOS LOS PRODUCTOS ----
+
+                    Console.WriteLine();
+                    if (totalProductos == 0)
+                    {
+                        Console.WriteLine("No hay productos en el inventario.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("--- INVENTARIO ACTUAL ---");
+                        Console.WriteLine($"{"#",-4} {"Producto",-20} {"Cantidad",8}");
+                        Console.WriteLine(new string('-', 34));
+
+                        for (int i = 0; i < totalProductos; i++)
+                        {
+                            Console.WriteLine($"{i + 1,-4} {nombres[i],-20} {cantidades[i],8}");
+                        }
+
+                        Console.WriteLine(new string('-', 34));
+                        Console.WriteLine($"Total de productos distintos: {totalProductos}");
+                    }
+                }
+                else if (opcion == 3)
+                {
+                    Console.WriteLine("\nSaliendo del inventario...");
+                }
+                else
+                {
+                    Console.WriteLine("\nOpción no válida.");
+                }
+
+            } while (opcion != 3);
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona ENTER para salir...");
+            Console.ReadLine();
+        }
+    }
+}
